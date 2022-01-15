@@ -8,6 +8,12 @@ require('dotenv/config');
 
 const app = express();
 
+//Realizados la llamada a jwt
+const jwt = require("jsonwebtoken");
+
+app.use(express.urlencoded({extended:false}));
+app.use(express.json());
+
 //Midleware que habilita cors
 //Cross-origin resource sharing (CORS) is a mechanism that allows restricted 
 //resources on a web page to be requested from another domain outside the domain 
@@ -27,6 +33,9 @@ app.use('/', homeRoute);
 
 const categoriesRoute = require('./routes/categories');
 app.use('/categories', categoriesRoute);
+
+const userRoute = require('./routes/user');
+app.use('/user', userRoute);
 
 //Connect to Database
 mongoose.connect(process.env.DB_LOCAL,
